@@ -33,9 +33,9 @@ header.addEventListener("click", (e) => {
     if (e.target.id === "clear") clearGrid();
     else if (e.target.id === "resize") {
         do {
-            gridSize = prompt("Enter the new grid size", "64");
-            if (gridSize === null) return;
-            else gridSize = +gridSize;
+            let tmp = prompt("Enter the new grid size", "64");
+            if (tmp === null) return;
+            else gridSize = +tmp;
             if (gridSize < 1) {
                 alert("That is not a valid grid size!");
             }
@@ -49,7 +49,8 @@ header.addEventListener("click", (e) => {
     }
 });
 grid.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()}, 1.5)`;
+    if (!e.target.classList.contains("cells")) return;
+    e.target.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
 });
 
 createGrid();
