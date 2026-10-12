@@ -34,7 +34,7 @@ header.addEventListener("click", (e) => {
     else if (e.target.id === "resize") {
         let tmp = null;
         do {
-            tmp = prompt("Enter the new grid size", "64");
+            tmp = prompt("Enter the new grid size (1-100)", "64");
             if (tmp === null) return;
             if (+tmp < 1) {
                 alert("That is not a valid grid size!");
