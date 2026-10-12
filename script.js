@@ -32,19 +32,19 @@ function randomColor() {
 header.addEventListener("click", (e) => {
     if (e.target.id === "clear") clearGrid();
     else if (e.target.id === "resize") {
+        let tmp = null;
         do {
-            let tmp = prompt("Enter the new grid size", "64");
+            tmp = prompt("Enter the new grid size", "64");
             if (tmp === null) return;
-            else gridSize = +tmp;
-            if (gridSize < 1) {
+            if (+tmp < 1) {
                 alert("That is not a valid grid size!");
             }
-            else if (gridSize > 100) {
+            else if (+tmp > 100) {
                 alert("Too large for your browser to handle.");
-            } else if (isNaN(gridSize)) {
+            } else if (isNaN(+tmp)) {
                 alert("That is not even a number!")
-            }
-        } while (isNaN(gridSize) || gridSize < 1 || gridSize > 100);
+            } else gridSize = +tmp;
+        } while (isNaN(+tmp) || +tmp < 1 || +tmp > 100);
         clearGrid();
     }
 });
