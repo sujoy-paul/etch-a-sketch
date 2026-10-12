@@ -1,5 +1,4 @@
-let gridSize = 64;
-const gridWidth = 560;
+let gridSize = 16;
 const grid = document.querySelector("#grid");
 const header = document.querySelector("#header");
 
@@ -33,18 +32,24 @@ function randomColor() {
 header.addEventListener("click", (e) => {
     if (e.target.id === "clear") clearGrid();
     else if (e.target.id === "resize") {
-        gridSize = +prompt("Enter the new grid size", "64");
-        while (gridSize < 1) {
-            gridSize = +prompt("Re-enter a valid grid size", "1");
-        }
-        while (gridSize > 100) {
-            gridSize = +prompt("Too large for your browser to handle. Re-enter", "100");
-        }
+        do {
+            gridSize = prompt("Enter the new grid size", "64");
+            if (gridSize === null) return;
+            else gridSize = +gridSize;
+            if (gridSize < 1) {
+                alert("That is not a valid grid size!");
+            }
+            else if (gridSize > 100) {
+                alert("Too large for your browser to handle.");
+            } else if (isNaN(gridSize)) {
+                alert("That is not even a number!")
+            }
+        } while (isNaN(gridSize) || gridSize < 1 || gridSize > 100);
         clearGrid();
     }
 });
 grid.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+    e.target.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()}, 1.5)`;
 });
 
 createGrid();
