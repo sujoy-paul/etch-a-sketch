@@ -33,7 +33,13 @@ function randomColor() {
 header.addEventListener("click", (e) => {
     if (e.target.id === "clear") clearGrid();
     else if (e.target.id === "resize") {
-        gridSize = +prompt("Enter the new grid size:", "64");
+        gridSize = +prompt("Enter the new grid size", "64");
+        while (gridSize < 1) {
+            gridSize = +prompt("Re-enter a valid grid size", "1");
+        }
+        while (gridSize > 100) {
+            gridSize = +prompt("Too large for your browser to handle. Re-enter", "100");
+        }
         clearGrid();
     }
 });
